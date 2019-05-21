@@ -1,5 +1,5 @@
 # pyladder
-A python library for planarity testing and rendering of ladder type graphs.  Built and tested with Python 3.7.0 32-bit
+A python library for planarity testing and rendering of ladder type graphs.  Built and tested with Python 3.7.0 32-bit on Windows 10 and Python 3.7.3 64-bit on Mac OS X.
 
 # Background:
 
@@ -9,7 +9,8 @@ Note that as this is a learning exercise, some of the style used will not adhere
 
 # Practical applications:
 
-#Programmable logic controllers:
+## Programmable logic controllers:
+
 The class can be used to display a ladder representing protective interlock logic.
 
 ## Gaming:
@@ -17,8 +18,6 @@ The class can be used to render a maze or connected points in space in real time
 
 ## Planarity testing:
 The input node list could represent a list of electronic parts and the output could then be used to create an circuit board etch where the requirement is that the connecting line segments cannot cross, for obvious reasons.
-
-Use LINK18.DAT to test a non-planar graph.
 
 ## Calling and usage convention 1:
 A python dictionary describing the ladder as follows:
@@ -36,14 +35,21 @@ Note that it is up to the client to create the dictionary.
 The above will generate the following visual:
 
 <p align="center">
-  <img alt="VS Code in action" src="https://i.postimg.cc/4d26rvPD/LINK1-DAT.png">
+  <img alt="VS Code in action" src="https://i.postimg.cc/J4WYpjP6/LINK1-DAT.png">
 </p>
 
 LINK17.DAT file will display generat the following visual:
 
 <p align="center">
-  <img alt="VS Code in action" src="https://i.postimg.cc/SxmKy9jj/LINK17-DAT.png">
+  <img alt="VS Code in action" src="https://i.postimg.cc/mrq8C9PS/LINK17-DAT.png">
 </p>
+
+LINK18.DAT is a non-planar ladder.  A 'Ladder is not planar' message will be shown.  The code will attempt to render the graph as much as possible without crossing connections (or line segments) although the correctness of the plot is not gauranteed.  LINK18.DAT will generate the following:
+
+<p align="center">
+  <img alt="VS Code in action" src="https://i.postimg.cc/8kqgNFwM/LINK18-DAT.png">
+</p>
+
 
 ## Calling and usage convention 2:
 
@@ -91,6 +97,7 @@ LINK18.DAT
 4. Comment out debug lines.  Presently the command line output is very verbose.  Status = Oustanding
 5. File LINK36.DAT is not rendering correctly
 6. File LINK20.DAT is not rendering correctly
+8. File LINK30.DAT is not rendering correctly
 
 
 

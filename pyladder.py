@@ -98,7 +98,7 @@ class Pyladder():
         for coor in coors:
             # Debug: print the coordinate pairs for this line segment...
             # print(coor)
-            plt.plot([coor[0][0],coor[1][0]], [coor[0][1],coor[1][1]], color='red')
+            plt.plot([coor[0][0],coor[1][0]], [coor[0][1],coor[1][1]], '-o', color='red')
 
         # Set the vertical axis labels and display...
         plt.yticks(yTicks, graph_labels)
