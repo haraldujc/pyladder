@@ -30,8 +30,6 @@ my_graph.gen_graph(graph_input_sample)
 # Get the list of line segments as coordinates pairs...
 coors = my_graph.get_render()
 
-print(coors)
-
 # Remove horizontal axis labels since it really doesn't have a context
 plt.xticks([])
 

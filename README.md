@@ -91,13 +91,15 @@ LINK18.DAT
 
 # Issue log:
 
-1. The label for the top 'rung' is not displayed in the matplotlib line plot.  Status = Fixed
-2. The ladder representation in file LINK32.DAT is returning a 'graph rendering failed' message.   Status = Fixed
-3. Improve the visual rendering by including a marker on the vertical line segments for each level of the ladder.  This would be helpful when using the class to render PLC ladder logic.  Status = Oustanding
-4. Comment out debug lines.  Presently the command line output is very verbose.  Status = Oustanding
-5. File LINK36.DAT is not rendering correctly 
-6. File LINK20.DAT is not rendering correctly (out of order along y-axis)
-8. File LINK30.DAT is not rendering correctly (out of order along y-axis)
+1.  The label for the top 'rung' is not displayed in the matplotlib line plot.  Status = Fixed
+2.  The ladder representation in file LINK32.DAT is returning a 'graph rendering failed' message.   Status = Fixed
+3.  Improve the visual rendering by including a marker on the vertical line segments for each level of the ladder.  This would be helpful when using the class to render PLC ladder logic.  Status = Oustanding
+4.  Comment out debug lines.  Presently the command line output is very verbose.  Status = Fixed
+5.  File LINK36.DAT is not rendering correctly (out of order along y-axis).  Status = Fixed
+6.  File LINK20.DAT is not rendering correctly (out of order along y-axis).  Status = Fixed
+7.  File LINK30.DAT is not rendering correctly.  Status = Fixed, however the ladder is too large to display, must find a scrollable plotting tool.
+8.  Implement a scrollable visual plotting library.  Status = Outstanding
+9. Implement a non-visual method call that returns only a planar/non-planar boolean.  Can be used for batch jobs.
 
 
 

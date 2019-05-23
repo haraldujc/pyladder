@@ -71,37 +71,42 @@ class Pyladder():
     # {'node x1' : [node x1, connection to node x2, connection to node x3, connection to node x4, ...], 'node x2' : [connection to node x3, ...]}
     # The method then proceeds to render a visual representation of the graph, whether it is planar or not.
     # If the graph is not planar, an advisory message is generated.
-    def display_graph_plot(self, node_axis_label, graph_def):
+    def display_graph_plot(self, ladder_title, y_axis_label, graph_def):
         graph_lst = []
         graph_labels = []
         yTicks = []
 
         for i in range(0, len(self.number) - 1):
             self.number[i] = 0
-            # print(self.number[i])
 
         for key, value in graph_def.items():
             graph_lst.append(value)
-            graph_labels.append(key)
-            yTicks.append(value[0])
 
         self.gen_graph(graph_lst)
 
         # Get the list of line segments as coordinates pairs...
+        # Some ladders have paths that retreat which will render incorrectly by matplotlib graph
         coors = self.get_render()
-        print('---------------------------------------')
-        print('coors')
-        print(coors)
 
-        # Remove horizontal axis labels since it really doesn't have a context
+        # Create y coordinate translation dictionary
+        y_dict = {}
+        y = 10
+        for i in range(0, self.n_verts):
+            y_dict[self.verts[i][0]] = y 
+            yTicks.append(y)
+            for key, value in graph_def.items():
+                if value[0] == self.verts[i][0]:
+                    graph_labels.append(key)
+            y = y + 10
+
+        # Remove horizontal axis labels since it doesn't have a context
         plt.xticks([])
-        plt.ylabel(node_axis_label)
+        plt.suptitle = ladder_title
+        plt.ylabel(y_axis_label)
 
         # Plot line segments as per the coors list
         for coor in coors:
-            # Debug: print the coordinate pairs for this line segment...
-            # print(coor)
-            plt.plot([coor[0][0],coor[1][0]], [coor[0][1],coor[1][1]], '-o', color='red')
+            plt.plot([coor[0][0], coor[1][0]], [y_dict[coor[0][1]], y_dict[coor[1][1]]], '-o', color='red')
 
         # Set the vertical axis labels and display...
         plt.yticks(yTicks, graph_labels)
@@ -114,20 +119,16 @@ class Pyladder():
     def gen_graph(self, graph_def):
         bln_fail = False
         if self.get_links(graph_def):
-            # debug 
-            self.disp_links(1)
+            # debug self.disp_links(1)
             self.search(self.verts[0][0], 0)
             self.sort()
-            # debug 
-            self.disp_links(2)
+            # debug self.disp_links(2)
             self.s = 0
             if self.path_finder(self.verts[0][0]):
                 self.scan_paths()
-                # debug 
-                self.disp_links(3)
+                # debug self.disp_links(3)
                 if self.convert_links():
-                    # debug 
-                    self.disp_links(4)
+                    # debug self.disp_links(4)
                     bln_fail = not self.scan_links(1) ## debug
                     # debug self.disp_links(5)
                     if bln_fail:
@@ -517,8 +518,7 @@ class Pyladder():
         first_lcl[self.edge_paths[0] - 1] = 0
 
         for i in range(0, self.n_edges):
-            #debug 
-            self.disp_links(700+i)
+            #debug self.disp_links(700+i)
             if fail_ret:
                 break
             if i > 0:
@@ -534,8 +534,7 @@ class Pyladder():
                     i_start = first_lcl[self.parents[i] - 1]
                     i_end = first_lcl[self.parents[i]]
                     j = i_start
-                    # debug 
-                    self.disp_links(898)
+                    # debug self.disp_links(898)
 
                     while j < i_end and self.edges[i][0] != self.edges[j][1]:
                         j += 1
@@ -544,8 +543,7 @@ class Pyladder():
                         inc = -1
                     else:
                         inc = 1
-                    # debug 
-                    self.disp_links(899)
+                    # debug self.disp_links(899)
                     if j < i_end and self.direcs[j] == self.direcs[j + 1]:
                         if -1 == inc:
                             self.columns[i] = min([self.columns[j],self.columns[j + 1]])
@@ -554,9 +552,7 @@ class Pyladder():
                     else:
                         self.columns[i] = self.columns[j]
                     
-                    # debug 
-                    self.disp_links(900)
-
+                    # debug self.disp_links(900)
                     if self.direcs[i] == self.direcs[j]:
                         for j in range(0, i):
                             if self.edges[i][0] == self.edges[j][0] and self.edge_sides[i] == self.edge_sides[j] and self.parents[i] == self.parents[j]:
@@ -569,8 +565,7 @@ class Pyladder():
                                     fail_ret = True
                                     break
 
-            # debug
-            self.disp_links(901)
+            # debug self.disp_links(901)
             if i > 0:
                 fail_ret = not self.move_links(i, inc)
             # debug self.disp_links(902)
@@ -694,7 +689,6 @@ class Pyladder():
             num[i] = self.number[i_v]
 
         for i in range(self.n_links - 1, 0, -1):
-            print(i)
             for j in range(0, i):
                 if (phi[j] > phi[j + 1] or (phi[j] == phi[j + 1] and num[j] > num[j + 1])):
                     for k in range(0, 4):
@@ -741,8 +735,8 @@ class Pyladder():
                         self.s = 0
                         fail_ret = not self.update_sides()
                         if fail_ret:
-                            print("Graph is non-planar\n")
-                            self.disp_links
+                            # print("Ladder is not planar\n")
+                            # self.disp_links
                             fail_ret = False
 
         return not fail_ret

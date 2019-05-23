@@ -45,14 +45,14 @@ graph_input_sample = {}
 # -----------------------------------------------------------------------
 # CALL METHOD 3 (comment out the other CALL METHODS if using this one)
 # Use this code when needing a hard-coded file name, usually to ease debugging
-str_File_Name = 'LINK27.DAT'
+str_File_Name = 'LINK9.DAT'
 # -----------------------------------------------------------------------
 
 max_node = 0
 
 input_file_path = Path(str_File_Name)
 if input_file_path.is_file():
-    print('Found file ' + str_File_Name)
+    # debug print('Found file ' + str_File_Name)
 
     with open(str_File_Name) as file_object:
         for line in file_object:
@@ -69,10 +69,10 @@ if input_file_path.is_file():
     node_list = [max_node]
     graph_input_sample['Finish ' + str(node_list[0])] = node_list
 
-    print(graph_input_sample)
+    # debug print(graph_input_sample)
 
     my_graph = Pyladder()
-    my_graph.display_graph_plot('Nodes', graph_input_sample)
+    my_graph.display_graph_plot(str_File_Name, '',graph_input_sample)
 else:
     print('File ' + str_File_Name + ' does not exist')
 
