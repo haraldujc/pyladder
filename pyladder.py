@@ -89,6 +89,9 @@ class Pyladder():
 
         # Get the list of line segments as coordinates pairs...
         coors = self.get_render()
+        print('---------------------------------------')
+        print('coors')
+        print(coors)
 
         # Remove horizontal axis labels since it really doesn't have a context
         plt.xticks([])
@@ -332,10 +335,10 @@ class Pyladder():
                         self.low_2[i_v] = min([self.low_1[i_v], self.low_2[i_w]])
                         self.low_1[i_v] = self.low_1[i_w]
                     else:
-                        if self.low_2[i_w] == self.low_1[i_v]:
+                        if self.low_1[i_w] == self.low_1[i_v]:
                             self.low_2[i_v] = min([self.low_2[i_v], self.low_2[i_w]])
                         else:
-                            self.low_2[i_v] = min([self.low_2[i_v], self.low_2[i_w]])
+                            self.low_2[i_v] = min([self.low_2[i_v], self.low_1[i_w]])
                 else:
                     if self.number[i_w] < self.number[i_v] and w != u:
                         self.links[i][2] = self.FROND
@@ -691,6 +694,7 @@ class Pyladder():
             num[i] = self.number[i_v]
 
         for i in range(self.n_links - 1, 0, -1):
+            print(i)
             for j in range(0, i):
                 if (phi[j] > phi[j + 1] or (phi[j] == phi[j + 1] and num[j] > num[j + 1])):
                     for k in range(0, 4):
@@ -947,11 +951,11 @@ class Pyladder():
                     for j in range(1, n - 1):
                         self.sort_verts[k + n - j -2] = self.verts[self.n_number(self.paths[i][j])][0]
                 count += n - 2
-        if self.debug:
-            print("Order of vertices:\n")
-            for i in range(0, count):
-                print(self.sort_verts[i])
-            print("\n")
+        # if self.debug:
+        #     print("Order of vertices:\n")
+        #     for i in range(0, count):
+        #         print(self.sort_verts[i])
+        #     print("\n")
 
 
 
