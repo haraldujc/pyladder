@@ -39,12 +39,15 @@ plt.ylabel('Nodes')
 # Plot line segments as per the coors list
 yTicks = []
 for coor in coors:
-    plt.plot([coor[0][0],coor[1][0]], [coor[0][1],coor[1][1]], color='red')
+    plt.plot([coor[0][0],coor[1][0]], [coor[0][1],coor[1][1]], '-o', color='red')
     for node in yTicks:
         if node == coor[0][1]:
             yTicks.remove(node)
             break
     yTicks.append(coor[0][1])
+
+# Note that this is partial implementation.  Plotting coors for ladders that have 'downward' paths will result in an incorrect plot.
+# Refer to method display_graph_plot for a complete and correct code to render of *.DAT files such as LINK20.DAT
 
 yTicks.sort()
 # Set the vertical axis labels and display...
