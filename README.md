@@ -5,7 +5,7 @@ A python library for planarity testing and rendering of ladder type graphs.  Bui
 
 pyladder is an exercise in translating an ANSI 'C' program to a python class.  The program will take a list of nodes representing a connected graph in the plane.  It will then attempt to generate a visual display of the graph, and advise if the graph is planar or not.
 
-Note that as this is a learning exercise, some of the style used will not adhere to generally accepted python patterns.  There is an upper limit on the number of connections between nodes.  This is not a limitation of the algorithm, rather due to the original 'C' program being a proof-of-concept and there was no appetite for dynamic memory management and fixed arrays were used instead.
+Note that as this is a learning exercise, some of the style used will not adhere to generally accepted python patterns.  There is an upper limit on the number of connections and nodes.  This is not a limitation of the algorithm, rather due to the original 'C' program being a proof-of-concept and there was no appetite for dynamic memory management and fixed arrays were used instead.
 
 # Practical applications:
 
@@ -26,25 +26,26 @@ key = a string label identifying the node
 value = a list of nodes to which this code connects.  The first element of each list is the nodes key, and the subsequent items are the keys of the nodes to which this node connects
 Example :
 
-    my_graph = pyladder()    
+    from pyladder import Pyladder
+    my_graph = Pyladder()    
     graph_input_sample = {'Part 10' : [10,20,30,40,50], 'Part 20' : [20,30,40,50], 'Part 30' : [30,40], 'Part 40' : [40,50], 'Finish' : [50]}
     my_graph.display_graph_plot('Nodes', graph_input_sample)
 
 Note that it is up to the client to create the dictionary.  
 
-The above will generate the following visual:
+The above will display as per below:
 
 <p align="center">
   <img alt="VS Code in action" src="https://i.postimg.cc/J4WYpjP6/LINK1-DAT.png">
 </p>
 
-LINK17.DAT file will display generat the following visual:
+LINK17.DAT file will display as per below:
 
 <p align="center">
   <img alt="VS Code in action" src="https://i.postimg.cc/mrq8C9PS/LINK17-DAT.png">
 </p>
 
-LINK18.DAT is a non-planar ladder.  A 'Ladder is not planar' message will be shown.  The code will attempt to render the graph as much as possible without crossing connections (or line segments) although the correctness of the plot is not gauranteed.  LINK18.DAT will generate the following:
+LINK18.DAT is a non-planar ladder.  A 'Ladder is not planar' message will be shown on the command line.  The code will attempt to render the graph as much as possible without crossing connections (or line segments) although the correctness of the plot is not gauranteed.  LINK18.DAT will display the following:
 
 <p align="center">
   <img alt="VS Code in action" src="https://i.postimg.cc/8kqgNFwM/LINK18-DAT.png">
@@ -62,7 +63,8 @@ The second list is metadata about the first list, and is used only by matplotlib
 ['node description 1', 'node description 2', 'node description 3',...] where 'node description 1 mapes to 'x' in the first list
 Example:
 
-    my_graph = gp.pyladder()
+    import pyladder as pylad
+    my_graph = pylad.pyladder()
     graph_input_sample = [[10,20,30,40,50], [20,30,40,50],[30,40],[40,50],[50]]
     graph_node_labels = ['Part A','Part B','Part C','Part D', 'Finish']
 
@@ -80,9 +82,27 @@ Here, coors is a list of coordinate pair lists representing the line segments to
 
 ### Refer to pyladder_client_dict.py, pyladder_client.py and pyladder_client_file.py for usage examples
 
+# A note on the *.DAT files
+
+The *DAT files were the input files to the original 'C' command line program.  Format used is one node identifier per line.  The first node is the 'source', and every node after up to '0' are the nodes to which the source connects.
+
+Example:
+
+10
+20
+25
+40
+0
+20
+39
+0
+...
+
+The sample client file pyladder_client_file.py can be used to injest and parse the *.DAT files into the dictionary data structure format required by pyladder.py, as described in calling convention 1 and the graph_input_sample dictionary specifically.
+
 # Non-planar samples
 
-The following files are examples on non-planar graphs:
+The following files are examples on non-planar ladders:
 LINK2.DAT
 LINK4.DAT
 LINK10.DAT
@@ -99,7 +119,8 @@ LINK18.DAT
 6.  File LINK20.DAT is not rendering correctly (out of order along y-axis).  Status = Fixed
 7.  File LINK30.DAT is not rendering correctly.  Status = Fixed, however the ladder is too large to display, must find a scrollable plotting tool.
 8.  Implement a scrollable visual plotting library.  Status = Outstanding
-9. Implement a non-visual method call that returns only a planar/non-planar boolean.  Can be used for batch jobs.
+9.  Implement a non-visual method call that returns only a planar/non-planar boolean.  Can be used for batch jobs.
+10. Transition this issue log to github issues.
 
 
 
