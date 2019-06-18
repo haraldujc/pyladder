@@ -10,15 +10,15 @@ Note that as this is a learning exercise, some of the style used will not adhere
 
 ## Practical applications
 
-## Programmable logic controllers
+### Programmable logic controllers
 
 The class can be used to display a ladder representing protective interlock logic.
 
-## Gaming
+### Gaming
 
 The class can be used to render a maze or connected points in space in real time from a list of coordinates.  This is much more portable, space saving and dynamic as opposed to a fixed graphical representation in files or memory.
 
-## Planarity testing
+### Planarity testing
 
 The input node list could represent a list of electronic parts and the output could then be used to create an circuit board etch where the requirement is that the connecting line segments cannot cross, for obvious reasons.
 
