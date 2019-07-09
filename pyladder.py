@@ -76,9 +76,6 @@ class Pyladder():
         graph_labels = []
         yTicks = []
 
-        for i in range(0, len(self.number) - 1):
-            self.number[i] = 0
-
         for key, value in graph_def.items():
             graph_lst.append(value)
 

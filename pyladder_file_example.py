@@ -45,7 +45,7 @@ graph_input_sample = {}
 # -----------------------------------------------------------------------
 # CALL METHOD 3 (comment out the other CALL METHODS if using this one)
 # Use this code when needing a hard-coded file name, usually to ease debugging
-str_File_Name = 'LINK9.DAT'
+str_File_Name = 'LINK17.DAT'
 # -----------------------------------------------------------------------
 
 max_node = 0
