@@ -41,27 +41,62 @@ class Pyladder():
         self.PMAX = 40
         self.n = 0                                                  # Used for numbering the vertices
         self.s = 0                                                  # Number of first vertex in a path
-        self.number = np.array([0] * self.VMAX)                     # Internal vertex numbers
+
+        #self.number = np.array([0] * self.VMAX)                     # Internal vertex numbers
+        self.number = np.zeros(self.VMAX, dtype=int)
+
         self.n_verts = 0                                            # Total number of vertices
-        self.verts = np.array([[0] * 4] * self.VMAX)
+        #self.verts = np.array([[0] * 4] * self.VMAX)
+        self.verts = np.zeros((self.VMAX, 4), dtype=int)
+
         self.n_links = 0                                            # Total number of links
-        self.links = np.array([[0] * 4] * self.LMAX)
-        self.low_1 = np.array([0] * self.VMAX)                      # Lowest vertex reachable
-        self.low_2 = np.array([0] * self.VMAX)                      # Second lowest vertex reachable
+        #self.links = np.array([[0] * 4] * self.LMAX)
+        self.links = np.zeros((self.LMAX, 4), dtype=int)
+
+        #self.low_1 = np.array([0] * self.VMAX)                      # Lowest vertex reachable
+        self.low_1 = np.zeros(self.VMAX, dtype=int)
+
+        #self.low_2 = np.array([0] * self.VMAX)                      # Second lowest vertex reachable
+        self.low_2 = np.zeros(self.VMAX, dtype=int)
+
         self.n_paths = 0                                            # Total number of paths
-        self.path_sizes = np.array([0] * self.PMAX)                 # Sizes of paths
-        self.paths = np.array([[0] * self.LMAX] * self.PMAX)
-        self.used = np.array([0] * self.LMAX)                       # Used to keep track of links scanned
-        self.first_path = np.array([0] * self.VMAX)                 # Number of first path containing vertex
-        self.sides = np.array([[0] * 3] * self.PMAX)
-        self.sort_verts= np.array([0] * self.VMAX)                  # Vertices as ordered by paths procedure
+        #self.path_sizes = np.array([0] * self.PMAX)                 # Sizes of paths
+        self.path_sizes = np.zeros(self.PMAX, dtype=int)
+
+        #self.paths = np.array([[0] * self.LMAX] * self.PMAX)
+        self.paths = np.zeros((self.PMAX, self.LMAX), dtype=int)
+
+        #self.used = np.array([0] * self.LMAX)                       # Used to keep track of links scanned
+        self.used = np.zeros(self.LMAX, dtype=int)
+
+        #self.first_path = np.array([0] * self.VMAX)                 # Number of first path containing vertex
+        self.first_path = np.zeros(self.VMAX, dtype=int)
+
+        #self.sides = np.array([[0] * 3] * self.PMAX)
+        self.sides = np.zeros((self.PMAX, 3), dtype=int)
+
+        #self.sort_verts= np.array([0] * self.VMAX)                  # Vertices as ordered by paths procedure
+        self.sort_verts = np.zeros(self.VMAX, dtype=int)
+
         self.n_edges = 0                                            # Total number of links with multiples
-        self.edges = np.array([[0] * 2] * self.LMAX)
-        self.edge_paths = np.array([0] * self.LMAX)                 # Path number of links
-        self.direcs = np.array([0] * self.LMAX)                     # Directions of links (up or down)
-        self.edge_sides = np.array([0] * self.LMAX)                 # Sides of links (left or right)
-        self.parents = np.array([0] * self.LMAX)                    # Parent paths of links
-        self.columns = np.array([0] * self.LMAX)                    # Column numbers of links
+        #self.edges = np.array([[0] * 2] * self.LMAX)
+        self.edges = np.zeros((self.LMAX, 2), dtype=int)
+
+        #self.edge_paths = np.array([0] * self.LMAX)                 # Path number of links
+        self.edge_paths = np.zeros(self.LMAX, dtype=int)
+
+        #self.direcs = np.array([0] * self.LMAX)                     # Directions of links (up or down)
+        self.direcs = np.zeros(self.LMAX, dtype=int)
+
+        #self.edge_sides = np.array([0] * self.LMAX)                 # Sides of links (left or right)
+        self.edge_sides = np.zeros(self.LMAX, dtype=int)
+
+        #self.parents = np.array([0] * self.LMAX)                    # Parent paths of links
+        self.parents = np.zeros(self.LMAX, dtype=int)
+
+        #self.columns = np.array([0] * self.LMAX)                    # Column numbers of links
+        self.columns = np.zeros(self.LMAX, dtype=int)
+
         # self.matrix = np.array([[0] * self.LMAX] * self.VMAX)
         self.first_path[0] = 1
         self.debug = False
@@ -499,7 +534,8 @@ class Pyladder():
     #  The method returns FALSE if the forming of the ladder fails due to  
     #  links crossing each other. It returns TRUE otherwise.                   
     def scan_links(self, side):
-        first_lcl = np.array([0] * self.LMAX)
+        #first_lcl = np.array([0] * self.LMAX)
+        first_lcl = np.zeros(self.LMAX, dtype=int)
         fail_ret = False
         inc = 1
         i_start, i_end = 0, 0
@@ -667,8 +703,12 @@ class Pyladder():
     #  have the same number, they are sorted by the internal numbers of their  
     #  first vertices.                                                         
     def sort(self):
-        phi = np.array([0] * self.LMAX)
-        num = np.array([0] * self.LMAX)
+        # phi = np.array([0] * self.LMAX)
+        # num = np.array([0] * self.LMAX)
+
+        phi = np.zeros(self.LMAX, dtype=int)
+        num = np.zeros(self.LMAX, dtype=int)
+
         i_v = 0
         i_w = 0
 
@@ -900,8 +940,11 @@ class Pyladder():
     #  the sorted vertices to the output file.                                 
     def scan_paths(self):
         vert, vert_max, count, temp, n, k = 0, 0, 0, 0, 0, 0
-        right_max = np.array([0] * self.PMAX)
-        left_max = np.array([0] * self.PMAX)
+        # right_max = np.array([0] * self.PMAX)
+        # left_max = np.array([0] * self.PMAX)
+
+        right_max = np.zeros(self.PMAX, dtype=int)
+        left_max = np.zeros(self.PMAX, dtype=int)
 
         for j in range(1, self.path_sizes[0] - 1):
             self.sort_verts[count] = self.verts[self.n_number(self.paths[0][j])][0]
