@@ -1,5 +1,7 @@
 # pyladder
 
+Harald Ujc - Screenpop Software Inc.
+
 A python library for planarity testing and rendering of ladder type graphs.  Built and tested with Python 3.7.0 32-bit on Windows 10 and Python 3.7.3 64-bit on Mac OS X.
 
 ## Background
