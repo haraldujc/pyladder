@@ -114,35 +114,38 @@ class Pyladder():
         for key, value in graph_def.items():
             graph_lst.append(value)
 
-        self.gen_graph(graph_lst)
+        if self.gen_graph(graph_lst):
 
-        # Get the list of line segments as coordinates pairs...
-        # Some ladders have paths that retreat which will render incorrectly by matplotlib graph
-        coors = self.get_render()
+            # Get the list of line segments as coordinates pairs...
+            # Some ladders have paths that retreat which will render incorrectly by matplotlib graph
+            coors = self.get_render()
 
-        # Create y coordinate translation dictionary
-        y_dict = {}
-        y = 10
-        for i in range(0, self.n_verts):
-            y_dict[self.verts[i][0]] = y 
-            yTicks.append(y)
-            for key, value in graph_def.items():
-                if value[0] == self.verts[i][0]:
-                    graph_labels.append(key)
-            y = y + 10
+            # Create y coordinate translation dictionary
+            y_dict = {}
+            y = 10
+            for i in range(0, self.n_verts):
+                y_dict[self.verts[i][0]] = y 
+                yTicks.append(y)
+                for key, value in graph_def.items():
+                    if value[0] == self.verts[i][0]:
+                        graph_labels.append(key)
+                y = y + 10
 
-        # Remove horizontal axis labels since it doesn't have a context
-        plt.xticks([])
-        plt.suptitle = ladder_title
-        plt.ylabel(y_axis_label)
+            # Remove horizontal axis labels since it doesn't have a context
+            plt.xticks([])
+            plt.suptitle = ladder_title
+            plt.ylabel(y_axis_label)
 
-        # Plot line segments as per the coors list
-        for coor in coors:
-            plt.plot([coor[0][0], coor[1][0]], [y_dict[coor[0][1]], y_dict[coor[1][1]]], '-o', color='red')
+            # Plot line segments as per the coors list
+            for coor in coors:
+                plt.plot([coor[0][0], coor[1][0]], [y_dict[coor[0][1]], y_dict[coor[1][1]]], '-o', color='red')
 
-        # Set the vertical axis labels and display...
-        plt.yticks(yTicks, graph_labels)
-        plt.show()
+            # Set the vertical axis labels and display...
+            plt.yticks(yTicks, graph_labels)
+            plt.show()
+            return True
+        else:
+            return False
 
     # This method is a silent version of display_graph_plot.  It accepts a list of node lists as follows:
     # [[x1, x2, x3, x4,...],[x2, x3, x4, ...],[...],...] 
@@ -185,8 +188,8 @@ class Pyladder():
                         self.sort_links()
                         # debug self.disp_links(14)
                         # debug self.disp_graph()
-                    else:
-                            print("Ladder is not planar\n")
+
+        return not bln_fail
 
     #  This method writes the tables of vertical and horizontal links to   
     #  the output file.                                                        

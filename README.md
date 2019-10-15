@@ -35,11 +35,12 @@ Example :
     from pyladder import Pyladder
     my_graph = Pyladder()
     graph_input_sample = {'Part 10' : [10,20,30,40,50], 'Part 20' : [20,30,40,50], 'Part 30' : [30,40], 'Part 40' : [40,50], 'Finish' : [50]}
-    my_graph.display_graph_plot('Nodes', graph_input_sample)
+    if not my_graph.display_graph_plot('Nodes', graph_input_sample):
+      print('Ladder is not planar')
 
 Note that it is up to the client to create the dictionary.  
 
-The above will display as per below:
+The above call to display_graph_plot will return true or false according to the ladder planarity and will display as per below:
 
 <p align="center">
   <img alt="VS Code in action" src="https://i.postimg.cc/J4WYpjP6/LINK1-DAT.png">
@@ -73,8 +74,12 @@ Example:
     graph_input_sample = [[10,20,30,40,50], [20,30,40,50],[30,40],[40,50],[50]]
     graph_node_labels = ['Part A','Part B','Part C','Part D', 'Finish']
 
-    my_graph.gen_graph(graph_input_sample)
-    coors = my_graph.get_render()
+    if my_graph.gen_graph(graph_input_sample):
+      coors = my_graph.get_render()
+    else:
+      print('Ladder is not planar')
+
+The above call to gen_graph will return true or false according to the ladder planarity.
 
 Here, coors is a list of coordinate pair lists representing the line segments to be plotted:
 
