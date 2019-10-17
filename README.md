@@ -33,9 +33,9 @@ value = a list of nodes to which this code connects.  The first element of each 
 Example :
 
     from pyladder import Pyladder
-    my_graph = Pyladder()
-    graph_input_sample = {'Part 10' : [10,20,30,40,50], 'Part 20' : [20,30,40,50], 'Part 30' : [30,40], 'Part 40' : [40,50], 'Finish' : [50]}
-    if not my_graph.display_graph_plot('Nodes', graph_input_sample):
+    my_ladder = Pyladder()
+    ladder_input = {'Part 10' : [10,20,30,40,50], 'Part 20' : [20,30,40,50], 'Part 30' : [30,40], 'Part 40' : [40,50], 'Finish' : [50]}
+    if not my_ladder.display_graph_plot('Nodes', ladder_input):
       print('Ladder is not planar')
 
 Note that it is up to the client to create the dictionary.  
@@ -70,16 +70,16 @@ The second list is metadata about the first list, and is used only by matplotlib
 Example:
 
     import pyladder as pylad
-    my_graph = pylad.pyladder()
-    graph_input_sample = [[10,20,30,40,50], [20,30,40,50],[30,40],[40,50],[50]]
+    my_ladder = pylad.pyladder()
+    ladder_input = [[10,20,30,40,50], [20,30,40,50],[30,40],[40,50],[50]]
     graph_node_labels = ['Part A','Part B','Part C','Part D', 'Finish']
 
-    if my_graph.gen_graph(graph_input_sample):
-      coors = my_graph.get_render()
+    if my_ladder.gen_graph(ladder_input):
+      coors = my_ladder.get_render()
     else:
       print('Ladder is not planar')
 
-The above call to gen_graph will return true or false according to the ladder planarity.
+The call to gen_graph will return true or false according to the ladder planarity.
 
 Here, coors is a list of coordinate pair lists representing the line segments to be plotted:
 
@@ -90,7 +90,28 @@ Here, coors is a list of coordinate pair lists representing the line segments to
     [[xN,yN], [xM,yM]],
 ]
 
-### Refer to pyladder_client_dict.py, pyladder_client.py and pyladder_client_file.py for usage examples
+## Calling and usage convention 3
+
+A list containing coordinate pair lists each representing an edge connecting two nodes.
+
+Example:
+
+    import pyladder as pylad
+
+    ladder_edge_list = [[10,20], [10,30], [10,40], [10,50], [20,30], [20,40], [20,50], [30,40], [40,50]]
+    
+    my_ladder = Pyladder()
+
+    if my_ladder.display_graph_plot_edges('Nodes', 'dictionary input', ladder_edge_list):
+        print("Ladder is planar")
+    else:
+        print("Ladder is not planar")
+
+The call to display_graph_plot_edges will return true or false according to the ladder planarity.
+
+
+
+### Refer to pyladder_client_dict.py, pyladder_client.py, pyladder_edge_list_examply.py and pyladder_client_file.py for usage examples
 
 ## A note on the *.DAT files
 
@@ -108,7 +129,7 @@ Example:
 0
 ...
 
-The sample client file pyladder_client_file.py can be used to injest and parse the *.DAT files into the dictionary data structure format required by pyladder.py, as described in calling convention 1 and the graph_input_sample dictionary specifically.
+The sample client file pyladder_client_file.py can be used to injest and parse the *.DAT files into the dictionary data structure format required by pyladder.py, as described in calling convention 1 and the ladder_input dictionary specifically.
 
 ## Non-planar samples
 

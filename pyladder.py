@@ -102,7 +102,33 @@ class Pyladder():
         self.debug = False
 
     # This method takes a string label for the y-xis plot, and a dictionary of keys representing the node name
-    # used for the y-axis and corresponding values which are lists of coordinates for the connecting line segments, as follows:
+    # used for the y-axis and corresponding values which is a list of integer coordinates representing line segments connecting nodes as follows:
+    # [[x1,y1],[x1, y2],[x3, y3],...,[.,.]]
+    # The method then proceeds to render a visual representation of the graph, whether it is planar or not.
+    # If the graph is planar, true is returned, false is not
+    def display_graph_plot_edges(self, ladder_title, y_axis_label, graph_def_edges):
+        ladder_input = {}
+        last_node = -1
+
+        for edge in graph_def_edges:
+            if 2 == len(edge):
+                temp = []
+                if str(edge[0]) in ladder_input:
+                    temp = ladder_input[str(edge[0])]
+                    temp.append(edge[1])
+                    ladder_input[str(edge[0])] = temp
+                else:
+                    temp.append(edge[0])
+                    temp.append(edge[1])
+                    ladder_input[str(edge[0])] = temp
+                if edge[1] > last_node:
+                    last_node = edge[1]
+
+        ladder_input[str(last_node)] = [last_node]
+        return(self.display_graph_plot(ladder_title, y_axis_label, ladder_input))
+
+    # This method takes a string label for the y-xis plot, and a dictionary of keys representing the node name
+    # used for the y-axis and corresponding values which is a dictionary of coordinate lists for the connecting line segments, as follows:
     # {'node x1' : [node x1, connection to node x2, connection to node x3, connection to node x4, ...], 'node x2' : [connection to node x3, ...]}
     # The method then proceeds to render a visual representation of the graph, whether it is planar or not.
     # If the graph is not planar, an advisory message is generated.

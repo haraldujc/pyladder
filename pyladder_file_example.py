@@ -24,9 +24,9 @@ node_list = []
 # key = a string label identifying the node
 # value = a list of nodes to which this code connects.  The first element of each list is the nodes key, and the subsequent items are the keys of the
 # nodes to which this node connects
-# Example : # graph_input_sample = {'Part 10' : [10,20,30,40,50], 'Part 20' : [20,30,40,50], 'Part 30' : [30,40], 'Part 40' : [40,50], 'Finish' : [50]}
+# Example : # ladder_input = {'Part 10' : [10,20,30,40,50], 'Part 20' : [20,30,40,50], 'Part 30' : [30,40], 'Part 40' : [40,50], 'Finish' : [50]}
 
-graph_input_sample = {}
+ladder_input = {}
 # -----------------------------------------------------------------------
 
 # -----------------------------------------------------------------------
@@ -59,7 +59,7 @@ if input_file_path.is_file():
             if len(line) > 0:
                 if 0 == int(line):
                     # node_list.append(int(line))
-                    graph_input_sample['Part ' + str(node_list[0])] = node_list
+                    ladder_input['Part ' + str(node_list[0])] = node_list
                     node_list = []
                 else:
                     node_list.append(int(line))
@@ -67,12 +67,12 @@ if input_file_path.is_file():
     file_object.close()
 
     node_list = [max_node]
-    graph_input_sample['Finish ' + str(node_list[0])] = node_list
+    ladder_input['Finish ' + str(node_list[0])] = node_list
 
-    # debug print(graph_input_sample)
+    # debug print(ladder_input)
 
-    my_graph = Pyladder()
-    bln = my_graph.display_graph_plot(str_File_Name, '',graph_input_sample)
+    my_ladder = Pyladder()
+    bln = my_ladder.display_graph_plot(str_File_Name, '',ladder_input)
 
     if bln:
         print("Ladder is planar")

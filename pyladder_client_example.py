@@ -10,22 +10,23 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
-from pyladder import Pyladder
+# from pyladder import Pyladder
+# from works, added here as an alternative method to use pyladder
 import pyladder as pylad
 
-# graph_input_sample = [[10,20,30,40,50], [20,30,40,50],[30,40],[40,50],[50]]
+# ladder_input = [[10,20,30,40,50], [20,30,40,50],[30,40],[40,50],[50]]
 # graph_node_labels = ['Part A','Part B','Part C','Part D', 'Finish']
 
-# Another example
-# graph_input_sample = [[10,20],[20,30,30,40],[30,60,40],[40,50,50,60],[50,60],[60,70,80,110,120],[70,100],[80,100],[100,110],[110,200,150,150,160,160,170,170,180,180,190,190],[120,130,130,140,140],[130,200],[140,200],[150,200],[160,200],[170,200],[180,200],[190,200]]
-# graph_node_labels = ['Part A','Part B','Part C','Part D', 'Part E', 'Part F', 'Part G', 'Part H', 'Part I', 'Part J', 'Part K', 'Part L', 'Part M', 'Part N', 'Part O', 'Part P', 'Part Q', 'Part R','Finish']
+# Another planar example
+ladder_input = [[10,20],[20,30,30,40],[30,60,40],[40,50,50,60],[50,60],[60,70,80,110,120],[70,100],[80,100],[100,110],[110,200,150,150,160,160,170,170,180,180,190,190],[120,130,130,140,140],[130,200],[140,200],[150,200],[160,200],[170,200],[180,200],[190,200]]
+graph_node_labels = ['Part A','Part B','Part C','Part D', 'Part E', 'Part F', 'Part G', 'Part H', 'Part I', 'Part J', 'Part K', 'Part L', 'Part M', 'Part N', 'Part O', 'Part P', 'Part Q', 'Part R','Finish']
 
 # Non-planar graph example...
-graph_input_sample = [[10,20,90,120],[20,30, 100],[30, 40, 120],[40,50,80,90],[50,60,120],[60,70,100],[70,80]]
-graph_node_labels = ['Part A','Part B','Part C','Part D', 'Part E', 'Part F', 'Part G', 'Finish']
+# ladder_input = [[10,20,90,120],[20,30, 100],[30, 40, 120],[40,50,80,90],[50,60,120],[60,70,100],[70,80]]
+# graph_node_labels = ['Part A','Part B','Part C','Part D', 'Part E', 'Part F', 'Part G', 'Finish']
 
 my_graph = pylad.Pyladder()
-if my_graph.gen_graph(graph_input_sample):
+if my_graph.gen_graph(ladder_input):
 
     # Get the list of line segments as coordinates pairs...
     coors = my_graph.get_render()
