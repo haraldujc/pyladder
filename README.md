@@ -133,7 +133,7 @@ The sample client file pyladder_client_file.py can be used to injest and parse t
 
 ## Non-planar samples
 
-The following files are examples on non-planar ladders:
+The following files are examples of non-planar ladders:
 LINK2.DAT
 LINK4.DAT
 LINK10.DAT
