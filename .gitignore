@@ -3,3 +3,5 @@ __pycache__/pyladder.cpython-37.pyc
 .vscode/settings.json
 *.json
 *.pyc
+*.docx
+*.yml
