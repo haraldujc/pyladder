@@ -2,7 +2,7 @@
 
 Harald Ujc - Screenpop Software Inc.
 
-A python library for planarity testing and rendering of ladder type graphs.  Built and tested with Python 3.7.0 32-bit on Windows 10 and Python 3.7.3 64-bit on Mac OS X.
+A python library for planarity testing and rendering of ladder type graphs.  Built with Visual Studio Code and Python 3.7.0 32-bit, 3.7.4 64-bit Conda on Windows 10 and Python 3.7.3 64-bit, 3.7.3 64-bit Conda on Mac OS X.
 
 ## Background
 
@@ -108,8 +108,6 @@ Example:
         print("Ladder is not planar")
 
 The call to display_graph_plot_edges will return true or false according to the ladder planarity.
-
-
 
 ### Refer to pyladder_client_dict.py, pyladder_client.py, pyladder_edge_list_examply.py and pyladder_client_file.py for usage examples
 
