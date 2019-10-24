@@ -8,30 +8,46 @@
 # https://packaging.python.org/tutorials/installing-packages/
 
 # Install packaging packages
-# python3 -m pip install --user --upgrade setuptools wheel
-# python3 -m pip install --user --upgrade twine
+# python -m pip install --user --upgrade setuptools wheel
+# python -m pip install --user --upgrade twine
 
 # test pypi
 # Package pyladder and upload to test pypi (python package index)
-# python3 setup.py sdist bdist_wheel
-# python3 -m twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+# python setup.py sdist bdist_wheel
+# python -m twine upload --repository-url https://test.pypi.org/legacy/ dist/*
 
 # And here it is
 # https://test.pypi.org/project/pyladder/0.0.1/
 
 # Now install locally
-# python3 -m pip install --index-url https://test.pypi.org/simple/ --no-deps example-pkg-your-username
-
-# Test with python from the command line
-# >>import pyladder
-# >>ladder_edge_list = [[10,20], [10,30], [10,40], [10,50], [20,30], [20,40], [20,50], [30,40], [40,50]]
-# >>my_ladder = pyladder.Pyladder()
-# >>my_ladder.display_graph_plot_edges('Nodes', 'dictionary input', ladder_edge_list)
+# python -m pip install --index-url https://test.pypi.org/simple/ --no-deps example-pkg-your-username
 
 # pypi
-# python3 -m twine upload dist/*
+# python -m twine upload dist/*
 # And here it is
 # https://pypi.org/project/pyladder/0.0.1/
+
+# More links
+# https://docs.python.org/3/tutorial/modules.html#packages
+
+# More reading
+# http://www.trytoprogram.com/python-programming/python-modules/
+# http://www.trytoprogram.com/python-programming/python-packages/
+
+# Working!
+
+# cd pyladder_pkg
+# python setup.py sdist bdist_wheel
+# python -m twine upload dist/*
+# pip install pyladder
+#
+# Python 3.7.0 (v3.7.0:1bf9cc5093, Jun 27 2018, 04:06:47) [MSC v.1914 32 bit (Intel)] on win32
+# Type "help", "copyright", "credits" or "license" for more information.
+# >>> import pyladder.pyladder as pylad
+# >>> ladder_edge_list = [[10,20], [10,30], [10,40], [10,50], [20,30], [20,40], [20,50], [30,40], [40,50]]
+# >>> my_ladder = pylad.Pyladder()
+# >>> my_ladder.display_graph_plot_edges('Nodes', 'dictionary input', ladder_edge_list)
+# True
 
 
 import os
@@ -55,14 +71,14 @@ classifiers = [
         'Topic :: Scientific/Engineering :: Mathematics',
         'Topic :: Scientific/Engineering :: Physics']
 
-sourcefiles = ['pyladder.py']
+sourcefiles = ['pyladder_pkg/']
 
 setuptools.setup(
     name='pyladder',
-    version='0.0.1',
-    packages=find_packages(),
+    version='0.0.4',
+    packages=setuptools.find_packages(),
     include_package_data=False,
-    # scripts=['pyladder.py'],
+    sourcefiles=sourcefiles,
     author='Harald Ujc',
     author_email='harald.ujc@screenpopsoftware.com',
     maintainer='Harald ujc',
