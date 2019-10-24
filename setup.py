@@ -73,7 +73,7 @@ classifiers = [
 
 setuptools.setup(
     name='pyladder',
-    version='0.0.6',
+    version='0.0.7',
     packages=setuptools.find_packages(),
     include_package_data=False,
     author='Harald Ujc',
