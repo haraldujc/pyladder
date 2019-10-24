@@ -71,14 +71,11 @@ classifiers = [
         'Topic :: Scientific/Engineering :: Mathematics',
         'Topic :: Scientific/Engineering :: Physics']
 
-sourcefiles = ['pyladder_pkg/']
-
 setuptools.setup(
     name='pyladder',
-    version='0.0.5',
+    version='0.0.6',
     packages=setuptools.find_packages(),
     include_package_data=False,
-    sourcefiles=sourcefiles,
     author='Harald Ujc',
     author_email='harald.ujc@screenpopsoftware.com',
     maintainer='Harald ujc',
