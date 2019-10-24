@@ -1,3 +1,4 @@
+# Algorithm: Efficient Planarity Testing by John Hopcroft and Robert Tarjan
 
 import numpy as np
 import matplotlib.pyplot as plt

@@ -4,6 +4,8 @@ Harald Ujc - Screenpop Software Inc.
 
 A python library for planarity testing and rendering of ladder type graphs.  Built with Visual Studio Code and Python 3.7.0 32-bit, 3.7.4 64-bit Conda on Windows 10 and Python 3.7.3 64-bit, 3.7.3 64-bit Conda on Mac OS X.
 
+The algorithm is sourced from 'Efficient Planarity Testing' by John Hopcroft and Robert Tarjan
+
 ## Background
 
 pyladder is an exercise in translating an ANSI 'C' program to a python class.  The program will take a list of nodes representing a connected graph in the plane.  It will then attempt to generate a visual display of the graph, and advise if the graph is planar or not.
