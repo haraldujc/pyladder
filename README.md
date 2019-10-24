@@ -26,6 +26,11 @@ The class can be used to render a maze or connected points in space in real time
 
 The input node list could represent a list of electronic parts and the output could then be used to create an circuit board etch where the requirement is that the connecting line segments cannot cross, for obvious reasons.
 
+Note: All examples below require installation of the pyladder package via:
+
+    pip install pyladder
+
+
 ## Calling and usage convention 1
 
 A python dictionary describing the ladder as follows:
@@ -34,10 +39,10 @@ key = a string label identifying the node
 value = a list of nodes to which this code connects.  The first element of each list is the nodes key, and the subsequent items are the keys of the nodes to which this node connects
 Example :
 
-    from pyladder import Pyladder
-    my_ladder = Pyladder()
+    import pyladder.pyladder as pylad
+    my_ladder = pylad.Pyladder()
     ladder_input = {'Part 10' : [10,20,30,40,50], 'Part 20' : [20,30,40,50], 'Part 30' : [30,40], 'Part 40' : [40,50], 'Finish' : [50]}
-    if not my_ladder.display_graph_plot('Nodes', ladder_input):
+    if not my_ladder.display_graph_plot('Pyladder Example 1', 'Step', ladder_input):
       print('Ladder is not planar')
 
 Note that it is up to the client to create the dictionary.  
@@ -71,8 +76,9 @@ The second list is metadata about the first list, and is used only by matplotlib
 ['node description 1', 'node description 2', 'node description 3',...] where 'node description 1 mapes to 'x' in the first list
 Example:
 
-    import pyladder as pylad
-    my_ladder = pylad.pyladder()
+    import pyladder.pyladder as pylad
+
+    my_ladder = pylad.Pyladder()
     ladder_input = [[10,20,30,40,50], [20,30,40,50],[30,40],[40,50],[50]]
     graph_node_labels = ['Part A','Part B','Part C','Part D', 'Finish']
 
@@ -80,6 +86,8 @@ Example:
       coors = my_ladder.get_render()
     else:
       print('Ladder is not planar')
+
+    print(coors)
 
 The call to gen_graph will return true or false according to the ladder planarity.
 
@@ -98,11 +106,11 @@ A list containing coordinate pair lists each representing an edge connecting two
 
 Example:
 
-    import pyladder as pylad
+    import pyladder.pyladder as pylad
 
     ladder_edge_list = [[10,20], [10,30], [10,40], [10,50], [20,30], [20,40], [20,50], [30,40], [40,50]]
     
-    my_ladder = Pyladder()
+    my_ladder = pylad.Pyladder()
 
     if my_ladder.display_graph_plot_edges('Nodes', 'dictionary input', ladder_edge_list):
         print("Ladder is planar")
