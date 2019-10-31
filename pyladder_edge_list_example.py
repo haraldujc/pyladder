@@ -14,6 +14,7 @@ ladder_edge_list = [[10,20], [10,30], [10,40], [10,50], [20,30], [20,40], [20,50
 # removing the first edge makes the ladder planar
 # ladder_edge_list = [[10, 30], [10, 40], [10, 50],[20, 30],[20, 40],[20, 50],[30, 40], [30, 50],[40, 50]]
 
+
 # Non-planar ladder
 # graph_input_sample = {'Part A' : [10,20,90,120], 'Part B' : [20,30, 100], 'Part C' : [30, 40, 120], 'Part D' : [40,50,80,90], 'Part E' : [50,60,120], 'Part F' : [60,70,100], 'Part G' : [70,80]}
 # graph_input_sample transformed into an edge list equivalent is:
