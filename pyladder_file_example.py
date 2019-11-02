@@ -45,7 +45,7 @@ ladder_input = {}
 # -----------------------------------------------------------------------
 # CALL METHOD 3 (comment out the other CALL METHODS if using this one)
 # Use this code when needing a hard-coded file name, usually to ease debugging
-str_File_Name = 'test files/LINK18.DAT'
+str_File_Name = 'test files/LINK17.DAT'
 # -----------------------------------------------------------------------
 
 max_node = 0
