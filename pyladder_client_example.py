@@ -28,6 +28,7 @@ ladder_step_labels = ['Part A','Part B','Part C','Part D', 'Part E', 'Part F', '
 my_ladder = pylad.Pyladder()
 if my_ladder.gen_graph(ladder_input):
 
+    print("Ladder is planar")
     # Get the list of line segments as coordinates pairs...
     coors = my_ladder.get_render()
 
@@ -35,7 +36,7 @@ if my_ladder.gen_graph(ladder_input):
     plt.xticks([])
 
     # The vertical axis represent the nodes.  Supply an appropriate label here...
-    plt.ylabel('Nodes')
+    plt.ylabel('ladder step')
 
     # Plot line segments as per the coors list
     yTicks = []
@@ -53,6 +54,7 @@ if my_ladder.gen_graph(ladder_input):
     yTicks.sort()
     # Set the vertical axis labels and display...
     plt.yticks(yTicks, ladder_step_labels)
+    plt.title('list of list with external labels list example')
     plt.show()
 else:
     print("Ladder is not planer")

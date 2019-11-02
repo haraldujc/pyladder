@@ -45,7 +45,7 @@ ladder_input = {}
 # -----------------------------------------------------------------------
 # CALL METHOD 3 (comment out the other CALL METHODS if using this one)
 # Use this code when needing a hard-coded file name, usually to ease debugging
-str_File_Name = 'test files/LINK17.DAT'
+str_File_Name = 'test files/LINK18.DAT'
 # -----------------------------------------------------------------------
 
 max_node = 0
@@ -72,9 +72,7 @@ if input_file_path.is_file():
     # debug print(ladder_input)
 
     my_ladder = Pyladder()
-    bln = my_ladder.display_graph_plot(str_File_Name, '',ladder_input)
-
-    if bln:
+    if my_ladder.display_graph_plot('*.DAT file example:' + str_File_Name, 'ladder step', ladder_input, True):
         print("Ladder is planar")
     else:
         print("Ladder is not planar")
