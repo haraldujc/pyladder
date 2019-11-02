@@ -102,12 +102,13 @@ class Pyladder():
         self.first_path[0] = 1
         self.debug = False
 
-    # This method takes a string label for the y-xis plot, and a dictionary of keys representing the node name
+    # This method takes a string label for the y-xis plot, a dictionary of keys representing the node name and a boolean
+    # if a visual plot should be displayed in addition to returning True or False according to planarity
     # used for the y-axis and corresponding values which is a list of integer coordinates representing line segments connecting nodes as follows:
     # [[x1,y1],[x1, y2],[x3, y3],...,[.,.]]
     # The method then proceeds to render a visual representation of the graph, whether it is planar or not.
     # If the graph is planar, true is returned, false is not
-    def display_graph_plot_edges(self, ladder_title, y_axis_label, graph_def_edges):
+    def display_graph_plot_edges(self, ladder_title, y_axis_label, graph_def_edges, show_graph):
         ladder_input = {}
         last_node = -1
 
@@ -126,14 +127,15 @@ class Pyladder():
                     last_node = edge[1]
 
         ladder_input[str(last_node)] = [last_node]
-        return(self.display_graph_plot(ladder_title, y_axis_label, ladder_input))
+        return(self.display_graph_plot(ladder_title, y_axis_label, ladder_input, show_graph))
 
-    # This method takes a string label for the y-xis plot, and a dictionary of keys representing the node name
+    # This method takes a string for the plot title, label for the y-xis plot, a dictionary of keys representing the node name and a boolean
+    # if a visual plot should be displayed in addition to returning True or False according to planarity
     # used for the y-axis and corresponding values which is a dictionary of coordinate lists for the connecting line segments, as follows:
     # {'node x1' : [node x1, connection to node x2, connection to node x3, connection to node x4, ...], 'node x2' : [connection to node x3, ...]}
     # The method then proceeds to render a visual representation of the graph, whether it is planar or not.
-    # If the graph is not planar, an advisory message is generated.
-    def display_graph_plot(self, ladder_title, y_axis_label, graph_def):
+    # If the graph is not planar, False is returned otherwise True
+    def display_graph_plot(self, ladder_title, y_axis_label, graph_def, show_graph):
         graph_lst = []
         graph_labels = []
         yTicks = []
@@ -142,34 +144,34 @@ class Pyladder():
             graph_lst.append(value)
 
         if self.gen_graph(graph_lst):
+            if show_graph:
+                # Get the list of line segments as coordinates pairs...
+                # Some ladders have paths that retreat which will render incorrectly by matplotlib graph
+                coors = self.get_render()
 
-            # Get the list of line segments as coordinates pairs...
-            # Some ladders have paths that retreat which will render incorrectly by matplotlib graph
-            coors = self.get_render()
+                # Create y coordinate translation dictionary
+                y_dict = {}
+                y = 10
+                for i in range(0, self.n_verts):
+                    y_dict[self.verts[i][0]] = y 
+                    yTicks.append(y)
+                    for key, value in graph_def.items():
+                        if value[0] == self.verts[i][0]:
+                            graph_labels.append(key)
+                    y = y + 10
 
-            # Create y coordinate translation dictionary
-            y_dict = {}
-            y = 10
-            for i in range(0, self.n_verts):
-                y_dict[self.verts[i][0]] = y 
-                yTicks.append(y)
-                for key, value in graph_def.items():
-                    if value[0] == self.verts[i][0]:
-                        graph_labels.append(key)
-                y = y + 10
+                # Remove horizontal axis labels since it doesn't have a context
+                plt.xticks([])
+                plt.ylabel(y_axis_label)
 
-            # Remove horizontal axis labels since it doesn't have a context
-            plt.xticks([])
-            plt.suptitle = ladder_title
-            plt.ylabel(y_axis_label)
+                # Plot line segments as per the coors list
+                for coor in coors:
+                    plt.plot([coor[0][0], coor[1][0]], [y_dict[coor[0][1]], y_dict[coor[1][1]]], '-o', color='red')
 
-            # Plot line segments as per the coors list
-            for coor in coors:
-                plt.plot([coor[0][0], coor[1][0]], [y_dict[coor[0][1]], y_dict[coor[1][1]]], '-o', color='red')
-
-            # Set the vertical axis labels and display...
-            plt.yticks(yTicks, graph_labels)
-            plt.show()
+                # Set the vertical axis labels and display...
+                plt.yticks(yTicks, graph_labels)
+                plt.title(ladder_title)
+                plt.show()
             return True
         else:
             return False
