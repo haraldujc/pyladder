@@ -22,7 +22,7 @@ ladder_edge_list = [[10,20], [10,30], [10,40], [10,50], [20,30], [20,40], [20,50
 
 my_ladder = Pyladder()
 
-if my_ladder.display_graph_plot_edges('Nodes', 'dictionary input', ladder_edge_list):
+if my_ladder.display_graph_plot_edges('edge list example', 'ladder step', ladder_edge_list, True):
     print("Ladder is planar")
 else:
     print("Ladder is not planar")
