@@ -40,6 +40,8 @@
 # python setup.py sdist bdist_wheel
 # python -m twine upload dist/*
 # pip install pyladder
+# or
+# pip install --update pyladder
 #
 # Python 3.7.0 (v3.7.0:1bf9cc5093, Jun 27 2018, 04:06:47) [MSC v.1914 32 bit (Intel)] on win32
 # Type "help", "copyright", "credits" or "license" for more information.
@@ -67,13 +69,12 @@ classifiers = [
         'Operating System :: OS Independent',
         'Programming Language :: Python :: 3.7',
         'Topic :: Software Development :: Libraries :: Python Modules',
-        'Topic :: Scientific/Engineering :: Information Analysis',
         'Topic :: Scientific/Engineering :: Mathematics',
         'Topic :: Scientific/Engineering :: Physics']
 
 setuptools.setup(
     name='pyladder',
-    version='0.0.7',
+    version='0.0.8',
     packages=setuptools.find_packages(),
     include_package_data=False,
     author='Harald Ujc',
@@ -86,4 +87,5 @@ setuptools.setup(
     long_description_content_type='text/markdown',
     url='https://github.com/haraldujc/pyladder',
     python_requires='>=3.6',
+    license='BSD License'
 )
