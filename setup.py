@@ -37,6 +37,10 @@
 # Working!
 
 # cd pyladder_pkg
+
+# delete files in pyladder_pkg/dist
+# delete files in pyladder_pkg/build
+
 # python setup.py sdist bdist_wheel
 # python -m twine upload dist/*
 # pip install pyladder
